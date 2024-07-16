@@ -1074,6 +1074,11 @@ import ziscsr.ZISPengeluaranPenerimaDankes;
 import ziscsr.ZISPenghasilanPenerimaDankes;
 import ziscsr.ZISTernakPenerimaDankes;
 import ziscsr.ZISUkuranRumahPenerimaDankes;
+import bridging.DlgBerkasTTE;
+import digitalsignature.DlgListFileKlaimDigital;
+import digitalsignature.DlgListFileTte;
+import digitalsignature.DlgListLogTte;
+import digitalsignature.DlgManagementSignatureUser;
 
 
 /**
@@ -20866,7 +20871,7 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         form.setLocationRelativeTo(PanelUtama);
         form.setVisible(true);
         this.setCursor(Cursor.getDefaultCursor()); 
-    } 
+    }
     
     private void btnCatatanPersalinanActionPerformed(java.awt.event.ActionEvent evt) {
         isTutup();
@@ -21449,6 +21454,71 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         form.setLocationRelativeTo(PanelUtama);
         form.setVisible(true);
         DlgHome.dispose();
+        this.setCursor(Cursor.getDefaultCursor());
+    }
+    
+    private void btnDlgBerkasTTEActionPerformed(java.awt.event.ActionEvent evt) {
+        isTutup();
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        DlgBerkasTTE berkas=new DlgBerkasTTE(this,false);
+        berkas.setJudul("::[ Berkas TTE BSSN ]::","berkasttebssn/pages");
+        try {
+            berkas.loadURL("http://"+koneksiDB.HOSTHYBRIDWEB()+":"+prop.getProperty("PORTWEB")+"/"+prop.getProperty("HYBRIDWEB")+"/"+"berkasttebssn/login.php?act=login&usere="+koneksiDB.USERHYBRIDWEB()+"&passwordte="+koneksiDB.PASHYBRIDWEB()+"");                   
+        } catch (Exception ex) {
+            System.out.println("Notifikasi : "+ex);
+        }
+
+        berkas.setSize(PanelUtama.getWidth(),PanelUtama.getHeight());
+        berkas.setLocationRelativeTo(PanelUtama);        
+        berkas.setVisible(true);        
+        DlgHome.dispose();
+        this.setCursor(Cursor.getDefaultCursor());
+    }
+    
+    private void btnManageSignatureUserActionPerformed(java.awt.event.ActionEvent evt) {
+        isTutup();
+        DlgHome.dispose();
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        DlgManagementSignatureUser form=new DlgManagementSignatureUser(this,false);
+        form.setSize(PanelUtama.getWidth(), PanelUtama.getHeight());
+        form.setLocationRelativeTo(PanelUtama);
+        form.setVisible(true);
+        this.setCursor(Cursor.getDefaultCursor());
+    }
+    
+    private void btnManageSignatureLogActionPerformed(java.awt.event.ActionEvent evt) {
+        isTutup();
+        DlgHome.dispose();
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        DlgListLogTte form=new DlgListLogTte(this,false);
+        form.setSize(PanelUtama.getWidth(), PanelUtama.getHeight());
+        form.setLocationRelativeTo(PanelUtama);
+        form.setVisible(true);
+        form.tampil();
+        this.setCursor(Cursor.getDefaultCursor());
+    }
+    
+    private void btnManageSignatureFileActionPerformed(java.awt.event.ActionEvent evt) {
+        isTutup();
+        DlgHome.dispose();
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        DlgListFileTte form=new DlgListFileTte(this,false);
+        form.setSize(PanelUtama.getWidth(), PanelUtama.getHeight());
+        form.setLocationRelativeTo(PanelUtama);
+        form.setVisible(true);
+        form.tampil();
+        this.setCursor(Cursor.getDefaultCursor());
+    }
+    
+    private void btnManageSignatureFileKlaimActionPerformed(java.awt.event.ActionEvent evt) {
+        isTutup();
+        DlgHome.dispose();
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        DlgListFileKlaimDigital form=new DlgListFileKlaimDigital(this,false);
+        form.setSize(PanelUtama.getWidth(), PanelUtama.getHeight());
+        form.setLocationRelativeTo(PanelUtama);
+        form.setVisible(true);
+        form.tampil();
         this.setCursor(Cursor.getDefaultCursor());
     }
     
@@ -22210,8 +22280,8 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
             btnKirimSpecimenLabPKSatuSehat,btnKirimSpecimenLabMBSatuSehat,btnKirimObservationLabPKSatuSehat,btnKirimObservationLabMBSatuSehat,btnKirimDiagnosticReportLabPKSatuSehat,
             btnKirimDiagnosticReportLabMBSatuSehat,btnKepatuhanKelengkapanKeselamatanBedah,btnNilaiPiutangPerJenisBayarPerBulan,btnRingkasanPiutangPerJenisBayar,
             btnPenilaianPasienImunitasRendah,btnCatatanKeseimbanganCairan,btnCatatanObservasiCHBP,btnCatatanObservasiInduksiPersalinan,btnSKPKategoriPenilaian,btnSKPKriteriaPenilaian,
-            btnReferensiPoliMobileJKNFKTP,btnReferensiDokterMobileJKNFKTP,btnSKPPenilaianPegawai,btnMandiriMetodePembayaran,btnMandiriBankTujuanTRansfer,btnPembayaranPihakKe3BankMandiri,
-            btnMandiriKodeTransaksiTujuanTRansfer,btnSKPRekapitulasiPenilaian;
+            btnReferensiPoliMobileJKNFKTP,btnReferensiDokterMobileJKNFKTP,btnDlgBerkasTTE,btnManageSignatureUser,btnManageSignatureLog,btnManageSignatureFile,btnManageSignatureFileKlaim,
+            btnSKPPenilaianPegawai,btnMandiriMetodePembayaran,btnMandiriBankTujuanTRansfer,btnPembayaranPihakKe3BankMandiri,btnMandiriKodeTransaksiTujuanTRansfer,btnSKPRekapitulasiPenilaian;
     
     public void isWall(){
         try{            
@@ -25406,6 +25476,31 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
             
             if(akses.getreferensi_dokter_mobilejknfktp()==true){
                 Panelmenu.add(btnReferensiDokterMobileJKNFKTP);
+                jmlmenu++;
+            }
+            
+            if(akses.getberkas_tte()==true){
+                Panelmenu.add(btnDlgBerkasTTE);
+                jmlmenu++;
+            }
+            
+            if(akses.getberkas_tte()==true){
+                Panelmenu.add(btnManageSignatureUser);
+                jmlmenu++;
+            }
+            
+            if(akses.getberkas_tte()==true){
+                Panelmenu.add(btnManageSignatureLog);
+                jmlmenu++;
+            }
+            
+            if(akses.getberkas_tte()==true){
+                Panelmenu.add(btnManageSignatureFile);
+                jmlmenu++;
+            }
+            
+            if(akses.getberkas_tte()==true){
+                Panelmenu.add(btnManageSignatureFileKlaim);
                 jmlmenu++;
             }
         }else if(cmbMenu.getSelectedIndex()==12){ 
@@ -30578,6 +30673,31 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
             Panelmenu.add(btnReferensiDokterMobileJKNFKTP);
             jmlmenu++;
         }
+        
+        if(akses.getberkas_tte()==true){
+            Panelmenu.add(btnDlgBerkasTTE);
+            jmlmenu++;
+        }
+        
+        if(akses.getberkas_tte()==true){
+            Panelmenu.add(btnManageSignatureUser);
+            jmlmenu++;
+            }
+            
+        if(akses.getberkas_tte()==true){
+            Panelmenu.add(btnManageSignatureLog);
+            jmlmenu++;
+            }
+            
+        if(akses.getberkas_tte()==true){
+            Panelmenu.add(btnManageSignatureFile);
+            jmlmenu++;
+            }
+            
+        if(akses.getberkas_tte()==true){
+            Panelmenu.add(btnManageSignatureFileKlaim);
+            jmlmenu++;
+            }
 
         if(akses.getperusahaan_pasien()==true){
             Panelmenu.add(btnPerusahaan);
@@ -36967,6 +37087,41 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         if(akses.getreferensi_dokter_mobilejknfktp()==true){
             if(btnReferensiDokterMobileJKNFKTP.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
                 Panelmenu.add(btnReferensiDokterMobileJKNFKTP);
+                jmlmenu++;
+            }                
+        }
+        
+        if(akses.getberkas_tte()==true){
+            if(btnDlgBerkasTTE.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
+                Panelmenu.add(btnDlgBerkasTTE);
+                jmlmenu++;
+            }                
+        }
+        
+        if(akses.getberkas_tte()==true){
+            if(btnManageSignatureUser.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
+                Panelmenu.add(btnManageSignatureUser);
+                jmlmenu++;
+            }                
+        }
+        
+        if(akses.getberkas_tte()==true){
+            if(btnManageSignatureLog.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
+                Panelmenu.add(btnManageSignatureLog);
+                jmlmenu++;
+            }                
+        }
+        
+        if(akses.getberkas_tte()==true){
+            if(btnManageSignatureFile.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
+                Panelmenu.add(btnManageSignatureFile);
+                jmlmenu++;
+            }                
+        }
+        
+        if(akses.getberkas_tte()==true){
+            if(btnManageSignatureFile.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
+                Panelmenu.add(btnManageSignatureFile);
                 jmlmenu++;
             }                
         }
@@ -44461,6 +44616,46 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         btnReferensiDokterMobileJKNFKTP.setName("btnReferensiDokterMobileJKNFKTP"); 
         btnReferensiDokterMobileJKNFKTP.setPreferredSize(new java.awt.Dimension(200, 90));
         btnReferensiDokterMobileJKNFKTP.addActionListener(this::btnReferensiDokterMobileJKNFKTPActionPerformed);
+        
+        btnDlgBerkasTTE = new widget.ButtonBig();
+        btnDlgBerkasTTE.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/if_folder_images_61610.png"))); 
+        btnDlgBerkasTTE.setText("Berkas TTE BSSN");
+        btnDlgBerkasTTE.setIconTextGap(0);
+        btnDlgBerkasTTE.setName("DlgBerkasTTE"); 
+        btnDlgBerkasTTE.setPreferredSize(new java.awt.Dimension(200, 90));
+        btnDlgBerkasTTE.addActionListener(this::btnDlgBerkasTTEActionPerformed);
+        
+        btnManageSignatureUser = new widget.ButtonBig();
+        btnManageSignatureUser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/users.png")));
+        btnManageSignatureUser.setText("Management Signature Petugas");
+        btnManageSignatureUser.setIconTextGap(0);
+        btnManageSignatureUser.setName("btnManageSignatureUser"); 
+        btnManageSignatureUser.setPreferredSize(new java.awt.Dimension(200, 90));
+        btnManageSignatureUser.addActionListener(this::btnManageSignatureUserActionPerformed);
+        
+        btnManageSignatureLog = new widget.ButtonBig();
+        btnManageSignatureLog.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_reports_49615.png")));
+        btnManageSignatureLog.setText("Management Signature Log");
+        btnManageSignatureLog.setIconTextGap(0);
+        btnManageSignatureLog.setName("btnManageSignatureLog"); 
+        btnManageSignatureLog.setPreferredSize(new java.awt.Dimension(200, 90));
+        btnManageSignatureLog.addActionListener(this::btnManageSignatureLogActionPerformed);
+        
+        btnManageSignatureFile = new widget.ButtonBig();
+        btnManageSignatureFile.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_group_data_45163.png")));
+        btnManageSignatureFile.setText("Management Signature File");
+        btnManageSignatureFile.setIconTextGap(0);
+        btnManageSignatureFile.setName("btnManageSignatureLog"); 
+        btnManageSignatureFile.setPreferredSize(new java.awt.Dimension(200, 90));
+        btnManageSignatureFile.addActionListener(this::btnManageSignatureFileActionPerformed);
+        
+        btnManageSignatureFileKlaim = new widget.ButtonBig();
+        btnManageSignatureFileKlaim.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1481038207_contacts.png")));
+        btnManageSignatureFileKlaim.setText("Management Signature File");
+        btnManageSignatureFileKlaim.setIconTextGap(0);
+        btnManageSignatureFileKlaim.setName("btnManageSignatureFileKlaim"); 
+        btnManageSignatureFileKlaim.setPreferredSize(new java.awt.Dimension(200, 90));
+        btnManageSignatureFileKlaim.addActionListener(this::btnManageSignatureFileKlaimActionPerformed);
         
         btnSKPPenilaianPegawai = new widget.ButtonBig();
         btnSKPPenilaianPegawai.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/6088187_gloves_hand_safety_secure_icon.png"))); 

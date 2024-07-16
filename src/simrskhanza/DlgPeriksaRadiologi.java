@@ -778,7 +778,7 @@ public final class DlgPeriksaRadiologi extends javax.swing.JDialog {
         NmPtg.setBounds(546, 42, 249, 23);
 
         Tanggal.setForeground(new java.awt.Color(50, 70, 50));
-        Tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "25-09-2022" }));
+        Tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "11-06-2024" }));
         Tanggal.setDisplayFormat("dd-MM-yyyy");
         Tanggal.setName("Tanggal"); // NOI18N
         Tanggal.setOpaque(false);
@@ -973,6 +973,7 @@ public final class DlgPeriksaRadiologi extends javax.swing.JDialog {
         Scroll2.setName("Scroll2"); // NOI18N
         Scroll2.setOpaque(true);
 
+        tbPemeriksaan.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         tbPemeriksaan.setName("tbPemeriksaan"); // NOI18N
         tbPemeriksaan.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -1073,6 +1074,7 @@ public final class DlgPeriksaRadiologi extends javax.swing.JDialog {
         Scroll.setName("Scroll"); // NOI18N
         Scroll.setOpaque(true);
 
+        tbObat.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         tbObat.setName("tbObat"); // NOI18N
         tbObat.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -1102,6 +1104,7 @@ public final class DlgPeriksaRadiologi extends javax.swing.JDialog {
 
         HasilPeriksa.setColumns(20);
         HasilPeriksa.setRows(35);
+        HasilPeriksa.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         HasilPeriksa.setName("HasilPeriksa"); // NOI18N
         Scroll1.setViewportView(HasilPeriksa);
 
