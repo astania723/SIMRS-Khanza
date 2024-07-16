@@ -41,7 +41,7 @@ import org.springframework.http.MediaType;
  *
  * @author perpustakaan
  */
-public class DlgPassPhrase extends javax.swing.JDialog {
+public class DlgPassPhraseSurat extends javax.swing.JDialog {
     private Connection koneksi=koneksiDB.condb();
     private sekuel Sequel=new sekuel();
     private String username="",password="";
@@ -60,7 +60,7 @@ public class DlgPassPhrase extends javax.swing.JDialog {
     /** Creates new form DlgPemberianObat
      * @param parent
      * @param modal */
-    public DlgPassPhrase(java.awt.Frame parent, boolean modal) {
+    public DlgPassPhraseSurat(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
 
@@ -107,7 +107,7 @@ public class DlgPassPhrase extends javax.swing.JDialog {
             }
         });
 
-        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Passphrase ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Fira Sans", 0, 13), new java.awt.Color(70, 70, 70))); // NOI18N
+        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Passphrase ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(70, 70, 70))); // NOI18N
         internalFrame1.setName("internalFrame1"); // NOI18N
         internalFrame1.setPreferredSize(new java.awt.Dimension(875, 500));
         internalFrame1.setLayout(new java.awt.BorderLayout(1, 1));
@@ -343,8 +343,8 @@ public class DlgPassPhrase extends javax.swing.JDialog {
                  System.out.println("HAsil"+URL);
                  JOptionPane.showMessageDialog(null,metadata.path("message").asText());        
                         if(metadata.path("code").asText().equals("200")){
-                            Sequel.menyimpantf("berkas_tte","?,?,?,?,?,?,?","No.Rawat",7,new String[]{
-                        txtNamaFile.getText(),txtNoRawat.getText(),metadata.path("datetime").asText(),"001",txtLokasiFile.getText(),txtNamaFile.getText(),"MEDIS"
+                            Sequel.menyimpantf("berkas_tte_surat","?,?,?,?,?,?,?","No.Rawat",7,new String[]{
+                        txtNamaFile.getText(),txtNoRawat.getText(),metadata.path("datetime").asText(),"002",txtLokasiFile.getText(),txtNamaFile.getText(),"MEDIS"
                         });
                         dispose(); 
                         }
@@ -446,7 +446,7 @@ public class DlgPassPhrase extends javax.swing.JDialog {
     */
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(() -> {
-            DlgPassPhrase dialog = new DlgPassPhrase(new javax.swing.JFrame(), true);
+            DlgPassPhraseSurat dialog = new DlgPassPhraseSurat(new javax.swing.JFrame(), true);
             dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                 @Override
                 public void windowClosing(java.awt.event.WindowEvent e) {

@@ -29,6 +29,7 @@ import javax.swing.JTable;
 import javax.swing.event.DocumentEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
+import bridging.MobileJKNReferensiWaktuTaskID;
 
 /**
  *
@@ -148,6 +149,7 @@ public final class MobileJKNReferensiPendaftaran extends javax.swing.JDialog {
         BtnBatal = new widget.Button();
         BtnPrint = new widget.Button();
         BtnKeluar = new widget.Button();
+        BtnKetWarna = new widget.Button();
         panelGlass10 = new widget.panelisi();
         jLabel19 = new widget.Label();
         DTPCari1 = new widget.Tanggal();
@@ -285,6 +287,24 @@ public final class MobileJKNReferensiPendaftaran extends javax.swing.JDialog {
         });
         panelGlass8.add(BtnKeluar);
 
+        BtnKetWarna.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/kanan.png"))); // NOI18N
+        BtnKetWarna.setMnemonic('K');
+        BtnKetWarna.setText("CEK TASKID");
+        BtnKetWarna.setToolTipText("");
+        BtnKetWarna.setName("BtnKetWarna"); // NOI18N
+        BtnKetWarna.setPreferredSize(new java.awt.Dimension(160, 30));
+        BtnKetWarna.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnKetWarnaActionPerformed(evt);
+            }
+        });
+        BtnKetWarna.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                BtnKetWarnaKeyPressed(evt);
+            }
+        });
+        panelGlass8.add(BtnKetWarna);
+
         jPanel3.add(panelGlass8, java.awt.BorderLayout.CENTER);
 
         panelGlass10.setName("panelGlass10"); // NOI18N
@@ -297,7 +317,7 @@ public final class MobileJKNReferensiPendaftaran extends javax.swing.JDialog {
         panelGlass10.add(jLabel19);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "08-02-2022" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "06-12-2022" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -311,7 +331,7 @@ public final class MobileJKNReferensiPendaftaran extends javax.swing.JDialog {
         panelGlass10.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "08-02-2022" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "06-12-2022" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -525,6 +545,20 @@ public final class MobileJKNReferensiPendaftaran extends javax.swing.JDialog {
         }else{Valid.pindah(evt, BtnCheckin, BtnBatal);}
     }//GEN-LAST:event_BtnBelumKeyPressed
 
+    private void BtnKetWarnaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKetWarnaActionPerformed
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        MobileJKNReferensiWaktuTaskID warna=new MobileJKNReferensiWaktuTaskID(null,true);
+        //            catatan.setNoRm(TNoRM.getText());
+        warna.setSize(720,330);
+        warna.setLocationRelativeTo(internalFrame1);
+        warna.setVisible(true);
+        this.setCursor(Cursor.getDefaultCursor());
+    }//GEN-LAST:event_BtnKetWarnaActionPerformed
+
+    private void BtnKetWarnaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKetWarnaKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BtnKetWarnaKeyPressed
+
     /**
     * @param args the command line arguments
     */
@@ -548,6 +582,7 @@ public final class MobileJKNReferensiPendaftaran extends javax.swing.JDialog {
     private widget.Button BtnCari;
     private widget.Button BtnCheckin;
     private widget.Button BtnKeluar;
+    private widget.Button BtnKetWarna;
     private widget.Button BtnPrint;
     private widget.Tanggal DTPCari1;
     private widget.Tanggal DTPCari2;

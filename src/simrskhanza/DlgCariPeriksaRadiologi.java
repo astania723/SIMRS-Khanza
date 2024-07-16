@@ -736,7 +736,7 @@ public class DlgCariPeriksaRadiologi extends javax.swing.JDialog {
             }
         ));
         tbDokter.setComponentPopupMenu(jPopupMenu1);
-        tbDokter.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        tbDokter.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         tbDokter.setName("tbDokter"); // NOI18N
         tbDokter.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {

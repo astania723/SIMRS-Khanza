@@ -78,7 +78,7 @@ public final class RMDataResumePasienRanap extends javax.swing.JDialog {
             "Diagnosa Sekunder 4","ICD10 Sek 4","Prosedur Utama","ICD9 Utama","Prosedur Sekunder 1","ICD9 Sek1","Prosedur Sekunder 2",
             "ICD9 Sek2","Prosedur Sekunder 3","ICD9 Sek3","Alergi Obat","Diet","Hasil Lab Yang Belum Selesai (Pending)",
             "Instruksi/Anjuran Dan Edukasi (Follow Up)","Keadaan Pulang","Ket.Keadaan Pulang","Cara Keluar","Ket.Cara Keluar","Dilanjutkan",
-            "Ket.Dilanjutkan","Kontrol Kembali","Obat Pulang","Kode Bayar","Cara Bayar"
+            "Ket.Dilanjutkan","Kontrol Kembali","Obat Pulang","Kode Bayar","Cara Bayar","Status TTE"
         }){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
         };
@@ -2813,6 +2813,15 @@ public final class RMDataResumePasienRanap extends javax.swing.JDialog {
 
                 rs=ps.executeQuery();
                 while(rs.next()){
+                    int StatusTTE;
+                    String TTE;
+                    StatusTTE= Sequel.cariInteger("select count(no_rawat) from berkas_tte where no_rawat='"+rs.getString(1)+"' ");
+                    //StatusTTE=Sequel.cariIsi("select if(count(berkas_tte.no_rawat) > 0, 'Sudah', 'Draft') FROM berkas_tte WHERE jenis_file='SBPK' AND berkas_tte.no_rawat = '"+rs.getString("no_rawat")+"' ");
+                    if(StatusTTE>0){
+                        TTE="Sudah";
+                    }else{
+                        TTE="Belum";
+                    }
                     kodekamar="";namakamar="";tglkeluar="";jamkeluar="";
                     ps2=koneksi.prepareStatement(
                         "select if(kamar_inap.tgl_keluar='0000-00-00',current_date(),kamar_inap.tgl_keluar) as tgl_keluar,"+
@@ -2851,7 +2860,7 @@ public final class RMDataResumePasienRanap extends javax.swing.JDialog {
                         rs.getString("kd_prosedur_sekunder2"),rs.getString("prosedur_sekunder3"),rs.getString("kd_prosedur_sekunder3"),rs.getString("alergi"),
                         rs.getString("diet"),rs.getString("lab_belum"),rs.getString("edukasi"),rs.getString("keadaan"),rs.getString("ket_keadaan"),
                         rs.getString("cara_keluar"),rs.getString("ket_keluar"),rs.getString("dilanjutkan"),rs.getString("ket_dilanjutkan"),rs.getString("kontrol"),
-                        rs.getString("obat_pulang"),rs.getString("kd_pj"),rs.getString("png_jawab")
+                        rs.getString("obat_pulang"),rs.getString("kd_pj"),rs.getString("png_jawab"),TTE
                     });
                 }
             } catch (Exception e) {

@@ -18,7 +18,8 @@ import javax.swing.JOptionPane;
  */
 public class koneksiDB {
     private static Connection connection=null;
-    private static final Properties prop = new Properties();  
+    private static final Properties prop = new Properties(); 
+    private static final Properties propVer = new Properties();
     private static final MysqlDataSource dataSource=new MysqlDataSource();
     private static String var="";
     
@@ -31,7 +32,7 @@ public class koneksiDB {
                 dataSource.setUser(EnkripsiAES.decrypt(prop.getProperty("USER")));
                 dataSource.setPassword(EnkripsiAES.decrypt(prop.getProperty("PAS")));
                 connection=dataSource.getConnection();       
-                System.out.println("  Koneksi Berhasil. Sorry bro loading, silahkan baca dulu.... \n\n"+
+                /*System.out.println("  Koneksi Berhasil. Sorry bro loading, silahkan baca dulu.... \n\n"+
                         "	Software ini adalah Software Menejemen Rumah Sakit/Klinik/\n" +
                         "  Puskesmas yang  gratis dan boleh digunakan siapa saja tanpa dikenai \n" +
                         "  biaya apapun. Dilarang keras memperjualbelikan/mengambil \n" +
@@ -48,7 +49,11 @@ public class koneksiDB {
                         "  Licensi yang dianut di software ini https://en.wikipedia.org/wiki/Aladdin_Free_Public_License \n"+
                         "  Informasi dan panduan bisa dicek di halaman https://github.com/mas-elkhanza/SIMRS-Khanza/wiki \n"+
                         "  Bagi yang ingin berdonasi untuk pengembangan aplikasi ini bisa ke BSI 1015369872 atas nama Windiarto\n"+
-                        "                                                                           ");
+                        "                                                                           ");*/
+                System.out.println("  Successful connection to server ............ \n\n"+
+                        "  SIMRS Rumkit TK. IV Dr. Sumantri \n"+
+                        "");
+                
             }catch(Exception e){
                 System.out.println("Notif : "+e);
                 try {
@@ -65,6 +70,46 @@ public class koneksiDB {
             }
         }
         return connection;        
+    }
+    
+    public static String URLFINGERPRINTBPJS() {
+        try {
+            prop.loadFromXML(new FileInputStream("setting/database.xml"));
+            var = prop.getProperty("URLFINGERPRINTBPJS");
+        } catch (Exception e) {
+            var = "";
+        }
+        return var;
+    }
+
+    public static String URLAPLIKASIFINGERPRINTBPJS() {
+        try {
+            prop.loadFromXML(new FileInputStream("setting/database.xml"));
+            var = prop.getProperty("URLAPLIKASIFINGERPRINTBPJS");
+        } catch (Exception e) {
+            var = "";
+        }
+        return var;
+    }
+
+    public static String USERFINGERPRINTBPJS() {
+        try {
+            prop.loadFromXML(new FileInputStream("setting/database.xml"));
+            var = EnkripsiAES.decrypt(prop.getProperty("USERFINGERPRINTBPJS"));
+        } catch (Exception e) {
+            var = "";
+        }
+        return var;
+    }
+
+    public static String PASSWORDFINGERPRINTBPJS() {
+        try {
+            prop.loadFromXML(new FileInputStream("setting/database.xml"));
+            var = EnkripsiAES.decrypt(prop.getProperty("PASSWORDFINGERPRINTBPJS"));
+        } catch (Exception e) {
+            var = "";
+        }
+        return var;
     }
     
     public static String HOST(){

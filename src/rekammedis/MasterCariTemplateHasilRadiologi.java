@@ -136,6 +136,7 @@ public final class MasterCariTemplateHasilRadiologi extends javax.swing.JDialog 
         Scroll.setPreferredSize(new java.awt.Dimension(310, 402));
 
         tbKamar.setAutoCreateRowSorter(true);
+        tbKamar.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         tbKamar.setName("tbKamar"); // NOI18N
         tbKamar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -247,6 +248,7 @@ public final class MasterCariTemplateHasilRadiologi extends javax.swing.JDialog 
         Template.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         Template.setColumns(20);
         Template.setRows(40);
+        Template.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         Template.setName("Template"); // NOI18N
         scrollPane2.setViewportView(Template);
 

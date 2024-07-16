@@ -46,7 +46,7 @@ import java.util.Calendar;
 import javax.swing.JTable;
 import javax.swing.Timer;
 import javax.swing.table.TableColumn;
-import kepegawaian.DlgCariDokter;
+import kepegawaian.DlgCariPegawai;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -63,7 +63,7 @@ public class DlgManagementSignatureUser extends javax.swing.JDialog {
   private sekuel Sequel=new sekuel();
   private validasi Valid=new validasi();
   private Connection koneksi=koneksiDB.condb();
-  public  DlgCariDokter dokter=new DlgCariDokter(null,false);
+  public  DlgCariPegawai pegawai=new DlgCariPegawai(null,false);
 //  public  DlgListKodeAntrian listKodeLayanan=new DlgListKodeAntrian(null,false);
   
 
@@ -93,22 +93,23 @@ public class DlgManagementSignatureUser extends javax.swing.JDialog {
                 column.setPreferredWidth(200);
             }else if(i==2){
                 column.setPreferredWidth(200);
-            }else if(i==2){
+            }else if(i==3){
                 column.setPreferredWidth(100);
             }
         }
         tbMapingDokter.setDefaultRenderer(Object.class, new WarnaTable()); 
-        dokter.addWindowListener(new WindowListener() {
+        pegawai.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {;}
             @Override
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                    if(dokter.getTable().getSelectedRow()!= -1){                    
+                    if(pegawai.getTable().getSelectedRow()!= -1){                    
                        
-                            kdPetugas.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),0).toString());
-                            nmPetugas.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),1).toString());
+                            kdPetugas.setText(pegawai.getTable().getValueAt(pegawai.getTable().getSelectedRow(),0).toString());
+                            nmPetugas.setText(pegawai.getTable().getValueAt(pegawai.getTable().getSelectedRow(),1).toString());
+                            nik.setText(pegawai.getTable().getValueAt(pegawai.getTable().getSelectedRow(),23).toString());
                             nmPetugas.requestFocus();
                       
                     }                
@@ -193,7 +194,7 @@ public class DlgManagementSignatureUser extends javax.swing.JDialog {
             }
         });
 
-        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), "::[ Management Signature Petugas ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(70, 70, 70))); // NOI18N
+        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), "::[ Management Signature Petugas ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(70, 70, 70))); // NOI18N
         internalFrame1.setName("internalFrame1"); // NOI18N
         internalFrame1.setPreferredSize(new java.awt.Dimension(875, 200));
         internalFrame1.setLayout(new java.awt.BorderLayout(1, 1));
@@ -436,11 +437,11 @@ public class DlgManagementSignatureUser extends javax.swing.JDialog {
     }//GEN-LAST:event_nmPetugasKeyPressed
 
     private void BtnDataPasien1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnDataPasien1ActionPerformed
-                dokter.isCek();        
-                dokter.TCari.requestFocus();
-                dokter.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
-                dokter.setLocationRelativeTo(internalFrame1);
-                dokter.setVisible(true);
+        akses.setform("DlgManagementSignatureUser");
+        pegawai.emptTeks();
+        pegawai.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+        pegawai.setLocationRelativeTo(internalFrame1);
+        pegawai.setVisible(true);
     }//GEN-LAST:event_BtnDataPasien1ActionPerformed
 
     private void BtnDataPasien1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnDataPasien1KeyPressed
@@ -457,12 +458,24 @@ public class DlgManagementSignatureUser extends javax.swing.JDialog {
 
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
         if(kdPetugas.getText().trim().equals("")){
-            Valid.textKosong(kdPetugas,"Kode Dokter");
+            Valid.textKosong(kdPetugas,"Kode Petugas");
+        }else if(nmPetugas.getText().trim().equals("")){
+            Valid.textKosong(nmPetugas,"Nama Petugas");
+        }else if(nik.getText().trim().equals("")){
+            Valid.textKosong(nik,"NIK");
         }else{
-//            Sequel.menyimpan("mapping_dokterantrian","'"+kdPetugas.getText()+"','"+kdAntrian.getText()+"','"+kdPelayanan.getText()+"'");  
+            //Sequel.menyimpan("mapping_dokterantrian","'"+kdPetugas.getText()+"','"+nmPetugas.getText()+"','"+nik.getText()+"'");  
+        if(Sequel.menyimpantf("mapping_dokterantrian","?,?,?","Kode Petugas",3,new String[]{
+                    kdPetugas.getText(),nmPetugas.getText(),nik.getText().toString()
+                })==true)
+            
         emptTeks();
         tampil();
         }
+        
+        
+        
+        
     }//GEN-LAST:event_BtnSimpanActionPerformed
 
     private void BtnSimpanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnSimpanKeyPressed
@@ -577,9 +590,10 @@ public class DlgManagementSignatureUser extends javax.swing.JDialog {
         Valid.tabelKosong(tabMode);
         tabMode.addRow(new Object[]{"coba","User Uji Coba","0803202100007062","Active"});
         try {
-            ps=koneksi.prepareStatement("select * "+
-                "from mapping_dokterantrian inner join dokter ON mapping_dokterantrian.kd_dokter=dokter.kd_dokter "+
-                " order by kd_header");
+           ps=koneksi.prepareStatement(
+                "select mapping_dokterantrian.kd_dokter,mapping_dokterantrian.nm_dokter,mapping_dokterantrian.nik from mapping_dokterantrian" );
+            
+            
             try{
 //                ps.setString(1,"%"+TCari.getText().trim()+"%");
 //                ps.setString(2,"%"+TCari.getText().trim()+"%");
@@ -598,8 +612,7 @@ public class DlgManagementSignatureUser extends javax.swing.JDialog {
                 while(rs.next()){
                     String[] data={rs.getString("kd_dokter"),
                                    rs.getString("nm_dokter"),
-                                   rs.getString("kd_dokter_antrian"),
-                                   rs.getString("kd_header")};
+                                   rs.getString("nik")};
 //                    tabMode.addRow(data);
                 }
             }catch(SQLException e){
@@ -623,6 +636,7 @@ public class DlgManagementSignatureUser extends javax.swing.JDialog {
         if(tbMapingDokter.getSelectedRow()!= -1){      
             kdPetugas.setText(tbMapingDokter.getValueAt(tbMapingDokter.getSelectedRow(),0).toString());
             nmPetugas.setText(tbMapingDokter.getValueAt(tbMapingDokter.getSelectedRow(),1).toString());
+            nik.setText(tbMapingDokter.getValueAt(tbMapingDokter.getSelectedRow(),2).toString());
 //            kdAntrian.setText(tbMapingDokter.getValueAt(tbMapingDokter.getSelectedRow(),2).toString());
 //            kdPelayanan.setText(tbMapingDokter.getValueAt(tbMapingDokter.getSelectedRow(),3).toString());
             

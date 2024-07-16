@@ -32,6 +32,7 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import kepegawaian.DlgCariDokter;
+import digitalsignature.DlgViewPdfSurat;
 
 
 /**
@@ -43,6 +44,7 @@ public final class SuratBebasNarkoba extends javax.swing.JDialog {
     private Connection koneksi=koneksiDB.condb();
     private sekuel Sequel=new sekuel();
     private validasi Valid=new validasi();
+    private String FileName;
     private PreparedStatement ps;
     private ResultSet rs;
     private DlgCariDokter dokter=new DlgCariDokter(null,false);
@@ -59,7 +61,7 @@ public final class SuratBebasNarkoba extends javax.swing.JDialog {
         
         tabMode=new DefaultTableModel(null,new Object[]{
             "No.Surat Sakit","No.Rawat","No.R.M.","Nama Pasien","Tanggal Surat","Kategori","KD Dokter","Dokter","Keperluan",
-            "Opiat/Morphin","Ganja/Canabis","Amphetamin","Methampetamin","Benzodiazepin","Cocain"
+            "Opiat/Morphin","Ganja/Canabis","Amphetamin","Methampetamin","Benzodiazepin","Cocain","Status TTE"
             
         }){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
@@ -179,6 +181,7 @@ public final class SuratBebasNarkoba extends javax.swing.JDialog {
         MnCetakSuratSKBN1 = new javax.swing.JMenuItem();
         MnCetakSuratSKBN2 = new javax.swing.JMenuItem();
         MnCetakSuratSKBN3 = new javax.swing.JMenuItem();
+        MnDigitalTTE = new javax.swing.JMenuItem();
         internalFrame1 = new widget.InternalFrame();
         Scroll = new widget.ScrollPane();
         tbObat = new widget.Table();
@@ -290,6 +293,21 @@ public final class SuratBebasNarkoba extends javax.swing.JDialog {
             }
         });
         jPopupMenu1.add(MnCetakSuratSKBN3);
+
+        MnDigitalTTE.setBackground(new java.awt.Color(255, 255, 254));
+        MnDigitalTTE.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        MnDigitalTTE.setForeground(new java.awt.Color(50, 50, 50));
+        MnDigitalTTE.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        MnDigitalTTE.setText("Sign Digital Signature");
+        MnDigitalTTE.setToolTipText("");
+        MnDigitalTTE.setName("MnDigitalTTE"); // NOI18N
+        MnDigitalTTE.setPreferredSize(new java.awt.Dimension(220, 26));
+        MnDigitalTTE.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MnDigitalTTEActionPerformed(evt);
+            }
+        });
+        jPopupMenu1.add(MnDigitalTTE);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -469,7 +487,7 @@ public final class SuratBebasNarkoba extends javax.swing.JDialog {
         panelGlass9.add(jLabel19);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "03-07-2020" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "22-06-2024" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -483,7 +501,7 @@ public final class SuratBebasNarkoba extends javax.swing.JDialog {
         panelGlass9.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "03-07-2020" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "22-06-2024" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -603,7 +621,7 @@ public final class SuratBebasNarkoba extends javax.swing.JDialog {
         jLabel18.setBounds(511, 40, 100, 23);
 
         TanggalSurat.setForeground(new java.awt.Color(50, 70, 50));
-        TanggalSurat.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "03-07-2020" }));
+        TanggalSurat.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "22-06-2024" }));
         TanggalSurat.setDisplayFormat("dd-MM-yyyy");
         TanggalSurat.setName("TanggalSurat"); // NOI18N
         TanggalSurat.setOpaque(false);
@@ -1277,6 +1295,27 @@ public final class SuratBebasNarkoba extends javax.swing.JDialog {
         Valid.pindah(evt,Kategori,Keperluan);
     }//GEN-LAST:event_btnDokterKeyPressed
 
+    private void MnDigitalTTEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnDigitalTTEActionPerformed
+        if(tbObat.getSelectedRow()>-1){
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            FileName=tbObat.getValueAt(tbObat.getSelectedRow(),0).toString().replaceAll("/","_")+".pdf";
+            DlgViewPdfSurat berkas=new DlgViewPdfSurat(null,true);
+            if(Sequel.cariInteger("select count(no_rawat) from berkas_tte_surat where no_rawat='"+tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()+"'")>0){
+                berkas.tampilPdf(FileName,"berkastte/surat");
+                berkas.setButton(false);
+            }else{
+                createPdf(FileName);
+                berkas.tampilPdfLocal(FileName,"local","berkastte/surat",tbObat.getValueAt(tbObat.getSelectedRow(),0).toString());
+            };
+
+            berkas.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            berkas.setLocationRelativeTo(internalFrame1);
+            berkas.setVisible(true);
+
+            this.setCursor(Cursor.getDefaultCursor());
+        }
+    }//GEN-LAST:event_MnDigitalTTEActionPerformed
+
     /**
     * @param args the command line arguments
     */
@@ -1314,6 +1353,7 @@ public final class SuratBebasNarkoba extends javax.swing.JDialog {
     private javax.swing.JMenuItem MnCetakSuratSKBN1;
     private javax.swing.JMenuItem MnCetakSuratSKBN2;
     private javax.swing.JMenuItem MnCetakSuratSKBN3;
+    private javax.swing.JMenuItem MnDigitalTTE;
     private widget.TextBox NoSurat;
     private javax.swing.JPanel PanelInput;
     private widget.ScrollPane Scroll;
@@ -1387,12 +1427,21 @@ public final class SuratBebasNarkoba extends javax.swing.JDialog {
             try {
                 rs=ps.executeQuery();
                 while(rs.next()){
+                    int StatusTTE;
+                    String TTE;
+                    StatusTTE= Sequel.cariInteger("select count(no_rawat) from berkas_tte_surat where no_rawat='"+rs.getString(1)+"' ");
+                    //StatusTTE=Sequel.cariIsi("select if(count(berkas_tte.no_rawat) > 0, 'Sudah', 'Draft') FROM berkas_tte WHERE jenis_file='SBPK' AND berkas_tte.no_rawat = '"+rs.getString("no_rawat")+"' ");
+                    if(StatusTTE>0){
+                        TTE="Sudah";
+                    }else{
+                        TTE="Belum";
+                    }
                     tabMode.addRow(new String[]{
                         rs.getString(1),rs.getString(2),rs.getString(3),
                         rs.getString(4),rs.getString(5),rs.getString(6),
                         rs.getString(7),rs.getString(8),rs.getString(9),
                         rs.getString(10),rs.getString(11),rs.getString(12),
-                        rs.getString(13),rs.getString(14),rs.getString(15)
+                        rs.getString(13),rs.getString(14),rs.getString(15),TTE
                     });
                 }
             } catch (Exception e) {
@@ -1498,6 +1547,42 @@ public final class SuratBebasNarkoba extends javax.swing.JDialog {
         BtnHapus.setEnabled(akses.getsurat_bebas_narkoba());
         BtnEdit.setEnabled(akses.getsurat_bebas_narkoba());
     }
+    
+    void createPdf(String FileName) {                                                  
+        if(TPasien.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu pasien...!!!");
+        }else{
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                Map<String, Object> param = new HashMap<>();
+                param.put("keperluan",Keperluan.getText());
+                param.put("tanggalsurat",TanggalSurat.getSelectedItem().toString());
+                param.put("kategori",Kategori.getSelectedItem().toString());
+                param.put("nosurat",NoSurat.getText());
+                param.put("dokter",TDokter.getText());
+                param.put("opiat",hasil1.getSelectedItem().toString());
+                param.put("ganja",hasil2.getSelectedItem().toString());
+                param.put("amphetamin",hasil3.getSelectedItem().toString());
+                param.put("methamphetamin",hasil4.getSelectedItem().toString());
+                param.put("benzodiazepin",hasil5.getSelectedItem().toString());
+                param.put("cocain",hasil6.getSelectedItem().toString());
+                param.put("namars",akses.getnamars());
+                param.put("alamatrs",akses.getalamatrs());
+                param.put("kotars",akses.getkabupatenrs());
+                param.put("propinsirs",akses.getpropinsirs());
+                param.put("kontakrs",akses.getkontakrs());
+                param.put("emailrs",akses.getemailrs());  
+                finger=Sequel.cariIsi("select sha1(sidikjari.sidikjari) from sidikjari inner join pegawai on pegawai.id=sidikjari.id where pegawai.nik=?",KdDok.getText());
+                param.put("finger","Dikeluarkan di "+akses.getnamars()+", Kabupaten/Kota "+akses.getkabupatenrs()+"\nDitandatangani secara elektronik oleh "+TDokter.getText()+"\nID "+(finger.equals("")?KdDok.getText():finger)+"\n"+TanggalSurat.getSelectedItem());  
+                param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+                Valid.MyReportPDFWithName1("rptBebasNarkobaTTE.jasper", "report", "tempfile", FileName,"::[ Surat SKBN 1 ]::",
+                              " select reg_periksa.no_rawat,dokter.nm_dokter,pasien.tgl_lahir,pasien.nm_pasien,pasien.pekerjaan,"+
+                              " concat(pasien.alamat,', ',kelurahan.nm_kel,', ',kecamatan.nm_kec,', ',kabupaten.nm_kab) as alamat,pasien.jk,reg_periksa.kd_dokter " +
+                              " from reg_periksa inner join pasien inner join dokter inner join kelurahan inner join kecamatan inner join kabupaten " +
+                              " on reg_periksa.no_rkm_medis=pasien.no_rkm_medis and reg_periksa.kd_dokter=dokter.kd_dokter and pasien.kd_kel=kelurahan.kd_kel "+
+                              " and pasien.kd_kec=kecamatan.kd_kec and pasien.kd_kab=kabupaten.kd_kab where reg_periksa.no_rawat='"+TNoRw.getText()+"' ",param);
+                this.setCursor(Cursor.getDefaultCursor());  
+       }
+    }  
 }
 
 

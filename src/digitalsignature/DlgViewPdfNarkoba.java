@@ -69,19 +69,19 @@ import org.springframework.http.HttpEntity;
  *
  * @author perpustakaan
  */
-public class DlgViewPdf extends javax.swing.JDialog {
+public class DlgViewPdfNarkoba extends javax.swing.JDialog {
     private Connection koneksi=koneksiDB.condb();
     private sekuel Sequel=new sekuel();
     private String username="",alasanHapus,fileOpen="",LocationFile="";
     private validasi Valid=new validasi();
     private PreparedStatement ps;
     private ResultSet rs;
-    DlgPassPhrase passphrase=new DlgPassPhrase(null,true);
+    DlgPassPhraseNarkoba passphrase=new DlgPassPhraseNarkoba(null,true);
 
     /** Creates new form DlgPemberianObat
      * @param parent
      * @param modal */
-    public DlgViewPdf(java.awt.Frame parent, boolean modal) {
+    public DlgViewPdfNarkoba(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
 
@@ -143,7 +143,7 @@ passphrase.addWindowListener(new WindowListener() {
             }
         });
 
-        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Dokumen Signature PDF ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Fira Sans", 0, 13), new java.awt.Color(70, 70, 70))); // NOI18N
+        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Dokumen Signature PDF ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(70, 70, 70))); // NOI18N
         internalFrame1.setName("internalFrame1"); // NOI18N
         internalFrame1.setLayout(new java.awt.BorderLayout(1, 1));
 
@@ -247,7 +247,7 @@ passphrase.addWindowListener(new WindowListener() {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnViewFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnViewFileActionPerformed
-    if(Sequel.cariInteger("select count(nama_file) from berkas_tte where nama_file='"+txtNameFile.getText()+"'")>0){
+    if(Sequel.cariInteger("select count(nama_file) from berkas_tte_narkoba where nama_file='"+txtNameFile.getText()+"'")>0){
        LocationFile="server"; 
        setButton(false);
        deleteFile();
@@ -402,7 +402,7 @@ void viewpdf(String fileName,String fileLocation){
     */
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(() -> {
-            DlgViewPdf dialog = new DlgViewPdf(new javax.swing.JFrame(), true);
+            DlgViewPdfNarkoba dialog = new DlgViewPdfNarkoba(new javax.swing.JFrame(), true);
             dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                 @Override
                 public void windowClosing(java.awt.event.WindowEvent e) {

@@ -2037,14 +2037,14 @@ public final class RMDataResumePasien extends javax.swing.JDialog {
     private void MnDigitalTTEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnDigitalTTEActionPerformed
         if(tbObat.getSelectedRow()>-1){
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-            FileName=tbObat.getValueAt(tbObat.getSelectedRow(),0).toString().replaceAll("/","_")+".pdf";
+            FileName=tbObat.getValueAt(tbObat.getSelectedRow(),1).toString().replaceAll("/","_")+".pdf";
             DlgViewPdf berkas=new DlgViewPdf(null,true);
-            if(Sequel.cariInteger("select count(no_rawat) from berkas_tte where no_rawat='"+tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()+"'")>0){
+            if(Sequel.cariInteger("select count(no_rawat) from berkas_tte where no_rawat='"+tbObat.getValueAt(tbObat.getSelectedRow(),1).toString()+"'")>0){
                 berkas.tampilPdf(FileName,"berkastte/resume");
                 berkas.setButton(false);
             }else{
                 createPdf(FileName);
-                berkas.tampilPdfLocal(FileName,"local","berkastte/resume",tbObat.getValueAt(tbObat.getSelectedRow(),0).toString());
+                berkas.tampilPdfLocal(FileName,"local","berkastte/resume",tbObat.getValueAt(tbObat.getSelectedRow(),1).toString());
             };
 
             berkas.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
