@@ -736,6 +736,7 @@ public class DlgCariPeriksaRadiologi extends javax.swing.JDialog {
             }
         ));
         tbDokter.setComponentPopupMenu(jPopupMenu1);
+        tbDokter.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         tbDokter.setName("tbDokter"); // NOI18N
         tbDokter.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -1087,6 +1088,7 @@ public class DlgCariPeriksaRadiologi extends javax.swing.JDialog {
         HasilPeriksa.setBorder(null);
         HasilPeriksa.setColumns(25);
         HasilPeriksa.setRows(40);
+        HasilPeriksa.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         HasilPeriksa.setName("HasilPeriksa"); // NOI18N
         Scroll3.setViewportView(HasilPeriksa);
 

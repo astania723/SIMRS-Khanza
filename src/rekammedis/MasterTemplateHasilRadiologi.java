@@ -156,6 +156,7 @@ public class MasterTemplateHasilRadiologi extends javax.swing.JDialog {
         FormInput.add(label12);
         label12.setBounds(0, 10, 85, 23);
 
+        Kd.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         Kd.setName("Kd"); // NOI18N
         Kd.setPreferredSize(new java.awt.Dimension(207, 23));
         Kd.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -172,6 +173,7 @@ public class MasterTemplateHasilRadiologi extends javax.swing.JDialog {
         FormInput.add(label18);
         label18.setBounds(180, 10, 120, 23);
 
+        Nm.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         Nm.setName("Nm"); // NOI18N
         Nm.setPreferredSize(new java.awt.Dimension(207, 23));
         Nm.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -194,6 +196,7 @@ public class MasterTemplateHasilRadiologi extends javax.swing.JDialog {
         Template.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         Template.setColumns(20);
         Template.setRows(30);
+        Template.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         Template.setName("Template"); // NOI18N
         Template.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -232,6 +235,7 @@ public class MasterTemplateHasilRadiologi extends javax.swing.JDialog {
             }
         ));
         tbDokter.setToolTipText("Silahkan klik untuk memilih data yang mau diedit ataupun dihapus");
+        tbDokter.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         tbDokter.setName("tbDokter"); // NOI18N
         tbDokter.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
